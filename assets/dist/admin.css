@@ -1,0 +1,92 @@
+/* Enspire Reviews – admin */
+
+.er-admin .er-stars {
+	position: relative;
+	display: inline-block;
+	line-height: 1;
+	letter-spacing: 0.05em;
+	white-space: nowrap;
+}
+
+.er-admin .er-stars::before {
+	content: "★★★★★";
+	color: #dcdcde;
+}
+
+.er-admin .er-stars::after {
+	content: "★★★★★";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: calc(var(--er-rating, 0) * 20%);
+	overflow: hidden;
+	color: #dba617;
+}
+
+.er-admin .er-admin-num {
+	color: #646970;
+}
+
+.er-admin .column-rating {
+	width: 9em;
+}
+
+.er-admin .column-reports,
+.er-admin .column-status {
+	width: 7em;
+}
+
+.er-admin .column-date {
+	width: 11em;
+}
+
+.er-admin .column-target,
+.er-admin .column-author {
+	width: 15%;
+}
+
+.er-admin-avatar {
+	float: left;
+	margin: 0 8px 0 0;
+	border-radius: 50%;
+}
+
+.er-admin-reply {
+	margin-top: 6px;
+	padding-left: 8px;
+	border-left: 3px solid #2271b1;
+	color: #50575e;
+}
+
+.er-admin-reports {
+	display: inline-block;
+	min-width: 1.6em;
+	padding: 0 6px;
+	border-radius: 9px;
+	background: #d63638;
+	color: #fff;
+	font-weight: 600;
+	text-align: center;
+}
+
+.er-admin-status {
+	display: inline-block;
+	padding: 1px 8px;
+	border-radius: 9px;
+	font-size: 12px;
+}
+
+.er-admin-status--approved {
+	background: #edfaef;
+	color: #00710e;
+}
+
+.er-admin-status--spam {
+	background: #fcf0f1;
+	color: #8a2424;
+}
+
+.er-admin-check {
+	display: inline-block;
+	margin: 2px 0;
+}

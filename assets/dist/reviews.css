@@ -1,0 +1,568 @@
+/**
+ * Enspire Reviews – front-end styles.
+ * Inherits the theme's font and colors. Override the custom properties to restyle.
+ * Disable entirely in Settings → Enspire Reviews → Output → "Load plugin CSS".
+ */
+
+.er-reviews,
+.er-summary {
+	--er-star: #f5a524;
+	--er-star-empty: color-mix(in srgb, currentColor 18%, transparent);
+	--er-accent: #2563eb;
+	--er-accent-contrast: #fff;
+	--er-danger: #b42318;
+	--er-success: #067647;
+	--er-muted: color-mix(in srgb, currentColor 62%, transparent);
+	--er-border: color-mix(in srgb, currentColor 14%, transparent);
+	--er-surface: color-mix(in srgb, currentColor 4%, transparent);
+	--er-radius: 10px;
+	--er-gap: 1rem;
+}
+
+.er-reviews {
+	display: grid;
+	gap: calc(var(--er-gap) * 1.25);
+	scroll-margin-top: 2rem;
+}
+
+.er-reviews[aria-busy="true"] [data-er-region="list"] {
+	opacity: 0.55;
+	transition: opacity 0.15s;
+}
+
+.er-reviews__title {
+	margin: 0;
+}
+
+.er-sr-only {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Stars ------------------------------------------------------------- */
+
+.er-stars {
+	position: relative;
+	display: inline-block;
+	font-size: 1.15em;
+	line-height: 1;
+	letter-spacing: 0.08em;
+	white-space: nowrap;
+	vertical-align: -0.1em;
+}
+
+.er-stars::before {
+	content: "★★★★★";
+	color: var(--er-star-empty);
+}
+
+.er-stars::after {
+	content: "★★★★★";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: calc(var(--er-rating, 0) * 20%);
+	overflow: hidden;
+	color: var(--er-star);
+}
+
+.er-stars--small {
+	font-size: 0.95em;
+}
+
+/* Summary ----------------------------------------------------------- */
+
+.er-summary {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.4em;
+}
+
+.er-summary__avg {
+	font-weight: 700;
+	font-size: 1.15em;
+}
+
+.er-summary__count,
+.er-summary__none {
+	color: var(--er-muted);
+}
+
+.er-region--summary .er-summary {
+	font-size: 1.25rem;
+}
+
+.er-summary--compact {
+	font-size: 0.95em;
+}
+
+/* Breakdown --------------------------------------------------------- */
+
+.er-breakdown {
+	display: grid;
+	gap: 0.25rem;
+	max-width: 28rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.er-breakdown__row {
+	display: grid;
+	grid-template-columns: 4.5rem 1fr 2.5rem;
+	align-items: center;
+	gap: 0.6rem;
+	width: 100%;
+	padding: 0.2rem 0.4rem;
+	border: 0;
+	border-radius: 6px;
+	background: none;
+	color: inherit;
+	font: inherit;
+	font-size: 0.9em;
+	text-align: left;
+	cursor: pointer;
+}
+
+.er-breakdown__row:hover,
+.er-breakdown__row[aria-pressed="true"] {
+	background: var(--er-surface);
+}
+
+.er-breakdown__row[aria-pressed="true"] .er-breakdown__label {
+	font-weight: 700;
+}
+
+.er-breakdown__count {
+	color: var(--er-muted);
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+
+.er-bar {
+	display: block;
+	height: 0.5rem;
+	border-radius: 999px;
+	background: var(--er-star-empty);
+	overflow: hidden;
+}
+
+.er-bar__fill {
+	display: block;
+	height: 100%;
+	border-radius: inherit;
+	background: var(--er-star);
+}
+
+/* Filters ----------------------------------------------------------- */
+
+.er-filters {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+}
+
+.er-filters__tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+}
+
+.er-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4em;
+	padding: 0.35rem 0.8rem;
+	border: 1px solid var(--er-border);
+	border-radius: 999px;
+	background: none;
+	color: inherit;
+	font: inherit;
+	font-size: 0.9em;
+	cursor: pointer;
+}
+
+.er-chip[aria-pressed="true"] {
+	border-color: var(--er-accent);
+	background: var(--er-accent);
+	color: var(--er-accent-contrast);
+}
+
+.er-chip__count {
+	opacity: 0.75;
+	font-variant-numeric: tabular-nums;
+}
+
+.er-sort {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.9em;
+}
+
+.er-sort select {
+	font: inherit;
+}
+
+/* List / item ------------------------------------------------------- */
+
+.er-list {
+	display: grid;
+	gap: var(--er-gap);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.er-item {
+	margin: 0;
+	padding: var(--er-gap);
+	border: 1px solid var(--er-border);
+	border-radius: var(--er-radius);
+}
+
+.er-item--own {
+	border-color: color-mix(in srgb, var(--er-accent) 45%, transparent);
+}
+
+.er-item__header {
+	display: flex;
+	gap: 0.75rem;
+	align-items: flex-start;
+}
+
+.er-item__avatar {
+	flex: none;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.er-item__meta {
+	display: grid;
+	gap: 0.15rem;
+	min-width: 0;
+}
+
+.er-item__author {
+	font-weight: 600;
+}
+
+.er-item__sub {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+	color: var(--er-muted);
+	font-size: 0.875em;
+}
+
+.er-item__target {
+	font-size: 0.875em;
+}
+
+.er-item__content {
+	margin-top: 0.75rem;
+	overflow-wrap: anywhere;
+}
+
+.er-item__content > :last-child,
+.er-reply__content > :last-child {
+	margin-bottom: 0;
+}
+
+.er-badge {
+	display: inline-block;
+	margin-left: 0.4em;
+	padding: 0.05em 0.5em;
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--er-accent) 12%, transparent);
+	color: var(--er-accent);
+	font-size: 0.75em;
+	font-weight: 600;
+	vertical-align: middle;
+}
+
+.er-reply {
+	margin-top: 0.75rem;
+	padding: 0.75rem 0.9rem;
+	border-left: 3px solid var(--er-accent);
+	border-radius: 0 var(--er-radius) var(--er-radius) 0;
+	background: var(--er-surface);
+}
+
+.er-reply__title {
+	margin: 0 0 0.35rem;
+	font-weight: 600;
+	font-size: 0.9em;
+}
+
+.er-reply__date {
+	margin-left: 0.5em;
+	color: var(--er-muted);
+	font-weight: 400;
+}
+
+.er-item__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin-top: 0.75rem;
+	font-size: 0.875em;
+}
+
+.er-reply-form {
+	display: grid;
+	gap: 0.5rem;
+	margin-top: 0.75rem;
+}
+
+.er-reply-form__actions {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.er-empty {
+	margin: 0;
+	color: var(--er-muted);
+}
+
+/* Pagination -------------------------------------------------------- */
+
+.er-pagination {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.35rem;
+}
+
+.er-page {
+	min-width: 2.25rem;
+	padding: 0.35rem 0.6rem;
+	border: 1px solid var(--er-border);
+	border-radius: 8px;
+	background: none;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+}
+
+.er-page[aria-current="page"] {
+	border-color: var(--er-accent);
+	background: var(--er-accent);
+	color: var(--er-accent-contrast);
+}
+
+.er-page--gap {
+	border-color: transparent;
+	cursor: default;
+}
+
+/* Form -------------------------------------------------------------- */
+
+.er-form-wrap {
+	padding: calc(var(--er-gap) * 1.25);
+	border: 1px solid var(--er-border);
+	border-radius: var(--er-radius);
+	background: var(--er-surface);
+}
+
+.er-form {
+	display: grid;
+	gap: 0.9rem;
+}
+
+.er-form__title {
+	margin: 0;
+}
+
+.er-rating-input {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.er-rating-input legend {
+	margin-bottom: 0.25rem;
+	padding: 0;
+	font-weight: 600;
+}
+
+/* DOM order is 5..1; row-reverse shows 1..5 so "~" can color the lower stars. */
+.er-rating-input__stars {
+	display: inline-flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+}
+
+.er-rating-input__stars input {
+	position: absolute;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+}
+
+.er-rating-input__stars label {
+	padding: 0 0.1em;
+	font-size: 2rem;
+	line-height: 1;
+	color: var(--er-star-empty);
+	cursor: pointer;
+	transition: color 0.1s, transform 0.1s;
+}
+
+.er-rating-input__stars label::before {
+	content: "★";
+}
+
+.er-rating-input__stars input:checked ~ label,
+.er-rating-input__stars label:hover,
+.er-rating-input__stars label:hover ~ label {
+	color: var(--er-star);
+}
+
+.er-rating-input__stars:hover input:checked ~ label:not(:hover):not(:hover ~ label) {
+	color: var(--er-star-empty);
+}
+
+.er-rating-input__stars input:focus-visible + label {
+	outline: 2px solid var(--er-accent);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+.er-field {
+	display: grid;
+	gap: 0.35rem;
+	margin: 0;
+}
+
+.er-field label {
+	font-weight: 600;
+}
+
+.er-form textarea,
+.er-reply-form textarea {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.6rem 0.75rem;
+	border: 1px solid var(--er-border);
+	border-radius: 8px;
+	font: inherit;
+	resize: vertical;
+}
+
+.er-hint {
+	color: var(--er-muted);
+	font-size: 0.85em;
+}
+
+.er-hp {
+	position: absolute !important;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.er-form__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1rem;
+}
+
+.er-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.6rem 1.1rem;
+	border: 1px solid var(--er-border);
+	border-radius: 8px;
+	background: none;
+	color: inherit;
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.er-button--primary {
+	border-color: var(--er-accent);
+	background: var(--er-accent);
+	color: var(--er-accent-contrast);
+}
+
+.er-button:disabled {
+	opacity: 0.6;
+	cursor: progress;
+}
+
+.er-more {
+	margin: 0 auto;
+}
+
+.er-link {
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--er-accent);
+	font: inherit;
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+	cursor: pointer;
+}
+
+.er-link--muted {
+	color: var(--er-muted);
+}
+
+.er-link--danger {
+	color: var(--er-danger);
+}
+
+.er-link:disabled {
+	text-decoration: none;
+	cursor: default;
+}
+
+.er-msg {
+	margin: 0;
+	font-size: 0.9em;
+}
+
+.er-msg:empty {
+	display: none;
+}
+
+.er-msg--error {
+	color: var(--er-danger);
+}
+
+.er-msg--success {
+	color: var(--er-success);
+}
+
+.er-notice {
+	margin: 0;
+}
+
+.er-captcha {
+	min-height: 65px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.er-reviews * {
+		transition: none !important;
+	}
+}
