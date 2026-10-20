@@ -43,6 +43,7 @@ final class Settings {
 			// Moderation.
 			'notify_admin'              => true,
 			'notify_owner'              => true,
+			'allow_replies'             => true,
 			// Eligibility.
 			'min_account_age'           => 0,
 			'require_verified_email'    => false,
@@ -89,6 +90,7 @@ final class Settings {
 
 			'notify_admin'              => array( 'tab' => 'moderation', 'type' => 'bool' ),
 			'notify_owner'              => array( 'tab' => 'moderation', 'type' => 'bool' ),
+			'allow_replies'             => array( 'tab' => 'moderation', 'type' => 'bool' ),
 
 			'min_account_age'           => array( 'tab' => 'eligibility', 'type' => 'int', 'min' => 0, 'max' => 3650 ),
 			'require_verified_email'    => array( 'tab' => 'eligibility', 'type' => 'bool' ),

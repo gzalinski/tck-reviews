@@ -434,6 +434,9 @@ final class ReviewsController extends WP_REST_Controller {
 
 	/** @return bool|WP_Error */
 	public function owner_permission( WP_REST_Request $request ) {
+		if ( ! $this->service->replies_enabled() ) {
+			return new WP_Error( 'enspire_reviews_replies_disabled', __( 'Replies are turned off.', 'enspire-reviews' ), array( 'status' => 403 ) );
+		}
 		$review = $this->review_for_permission( $request );
 		if ( is_wp_error( $review ) ) {
 			return $review;

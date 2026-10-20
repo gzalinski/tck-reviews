@@ -127,6 +127,11 @@ final class SettingsPage {
 		$this->row( __( 'Publishing', 'enspire-reviews' ), '<p>' . esc_html__( 'Reviews are published immediately. Moderators can hide (spam) or delete them under Reviews in the admin menu.', 'enspire-reviews' ) . '</p>' );
 		$this->row( __( 'Notify admin', 'enspire-reviews' ), $this->checkbox( 'notify_admin', __( 'Email the site admin about new reviews', 'enspire-reviews' ) ) );
 		$this->row( __( 'Notify owner', 'enspire-reviews' ), $this->checkbox( 'notify_owner', __( 'Email the owner of the reviewed item about new reviews', 'enspire-reviews' ) ) );
+		$this->row(
+			__( 'Owner replies', 'enspire-reviews' ),
+			$this->checkbox( 'allow_replies', __( 'Owners can reply to reviews', 'enspire-reviews' ) ),
+			__( 'When off, reply buttons are removed and existing replies are hidden on the site (they stay in the database and come back when you turn this on again).', 'enspire-reviews' )
+		);
 	}
 
 	private function tab_eligibility(): void {

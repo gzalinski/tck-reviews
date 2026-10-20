@@ -296,6 +296,7 @@ final class Renderer {
 		$replied = $row->reply_at ? (int) strtotime( $row->reply_at . ' UTC' ) : 0;
 		$format  = (string) get_option( 'date_format' );
 		$is_own  = $viewer > 0 && (int) $row->author_id === $viewer;
+		$reply   = $this->service->replies_enabled() ? (string) $row->reply : '';
 
 		$data = array(
 			'id'           => (int) $row->id,
@@ -307,13 +308,13 @@ final class Renderer {
 			'date_iso'     => gmdate( 'c', $created ),
 			'date'         => (string) wp_date( $format, $created ),
 			'edited'       => $updated - $created > MINUTE_IN_SECONDS,
-			'reply'        => (string) $row->reply,
-			'reply_html'   => '' !== (string) $row->reply ? wpautop( esc_html( (string) $row->reply ) ) : '',
-			'reply_date'   => $replied ? (string) wp_date( $format, $replied ) : '',
+			'reply'        => $reply,
+			'reply_html'   => '' !== $reply ? wpautop( esc_html( $reply ) ) : '',
+			'reply_date'   => '' !== $reply && $replied ? (string) wp_date( $format, $replied ) : '',
 			'owner_name'   => (string) ( $target['owner_name'] ?? '' ),
 			'status'       => (string) $row->status,
 			'is_own'       => $is_own,
-			'can_reply'    => $viewer > 0 && $viewer === (int) ( $target['owner_id'] ?? 0 ),
+			'can_reply'    => $viewer > 0 && $viewer === (int) ( $target['owner_id'] ?? 0 ) && $this->service->replies_enabled(),
 			'can_report'   => $viewer > 0 && ! $is_own,
 			'can_delete'   => $is_own || $this->service->can_moderate( $viewer ),
 			'target'       => array(

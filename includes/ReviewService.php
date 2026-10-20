@@ -102,6 +102,11 @@ final class ReviewService {
 		return ( time() - (int) strtotime( $review->created_at . ' UTC' ) ) <= $days * DAY_IN_SECONDS;
 	}
 
+	/** Owner replies on/off (Settings → Moderation). */
+	public function replies_enabled(): bool {
+		return (bool) $this->settings->get( 'allow_replies' );
+	}
+
 	public function can_moderate( int $user_id = 0 ): bool {
 		$user_id = $user_id ?: get_current_user_id();
 		return $user_id > 0 && user_can( $user_id, Installer::CAP );

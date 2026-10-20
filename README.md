@@ -49,6 +49,10 @@ $rating  = enspire_reviews_schema_aggregate_rating( 'directory', $post_id ); // 
 echo enspire_reviews_stars_html( 4.5 );
 ```
 
+## Owner replies
+
+Settings → Enspire Reviews → Moderation → "Owners can reply to reviews" (on by default). When off, reply buttons disappear, existing replies are hidden on the site and in the REST output, and the reply endpoints return 403. Replies stay in the database and reappear when the setting is turned back on. Moderators still see and can delete them in wp-admin → Reviews.
+
 ## Templates
 
 Copy any file from `templates/` to `{your-theme}/enspire-reviews/` to override it:
@@ -64,7 +68,7 @@ Restyle with CSS custom properties on `.er-reviews` (`--er-star`, `--er-accent`,
 | `/reviews` | GET | public (approved only) → `{ html, items, has_more, total, pages, page, pagination }` |
 | `/reviews` | POST | logged in — creates, or edits the user's own review |
 | `/reviews/{id}` | PATCH, DELETE | author or moderator |
-| `/reviews/{id}/reply` | POST, DELETE | target owner |
+| `/reviews/{id}/reply` | POST, DELETE | target owner (403 when replies are turned off) |
 | `/reviews/{id}/report` | POST | logged in, not the author |
 | `/reviews/{id}/status` | POST | `enspire_moderate_reviews` |
 | `/summary` | GET | public → `{ avg, count, breakdown, html, breakdown_html }` |
